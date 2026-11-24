@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_page_views
+    description: Page view events from Snowplow, with time on page.
+    columns:
+      - name: page_view_id
+        description: Primary key for page views.
+        tests:
+          - unique
+          - not_null

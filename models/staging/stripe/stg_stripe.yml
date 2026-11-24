@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: Staged Stripe payments, with amounts converted to dollars.
+    columns:
+      - name: payment_id
+        description: Primary key for payments.
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: all_dates
+    description: One row per day in the date spine.
+    columns:
+      - name: date_day
+        description: Primary key for the date spine.
+        tests:
+          - unique
+          - not_null
