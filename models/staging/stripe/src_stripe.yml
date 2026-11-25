@@ -5,3 +5,16 @@ sources:
       database: raw
       tables:
         - name: payment
+          columns:
+            - name: id
+              tests:
+                - unique:
+                    config:
+                      severity: error
+                      error_if: ">100"
+                      warn_if: ">10"
+            - name: paymentmethod
+              tests:
+                - not_null:
+                    config:
+                      where: "status = 'success'"

@@ -33,3 +33,7 @@ models:
                     - returned
                     - placed
                     - return_pending
+                    - cancelled
+                config:
+                  limit: 10
+                  store_failures: true

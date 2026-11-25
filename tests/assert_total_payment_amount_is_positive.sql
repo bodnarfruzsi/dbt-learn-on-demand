@@ -1,3 +1,5 @@
+{{ config(store_failures = true) }}
+
 -- Orders without a successful payment have an amount of 0, so the total amount
 -- should never be negative. Return the orders where this isn't true, which makes
 -- the test fail.
