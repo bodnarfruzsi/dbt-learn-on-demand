@@ -9,6 +9,10 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_utils.cardinality_equality:
+              arguments:
+                field: customer_id
+                to: ref('stg_customers')
 
   - name: fct_orders
     description: One row per order, with the amount paid.
@@ -28,9 +32,16 @@ models:
       - name: amount
         description: Total successful payment amount for the order, in dollars.
         tests:
-          - average_dollars_spent_greater_than_one:
+          - dbt_expectations.expect_column_mean_to_be_between:
               arguments:
-                group_by_column: customer_id
+                min_value: 1
+                group_by: [customer_id]
+                row_condition: "order_id is not null"
+                strictly: false
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                strictly: false
 
   - name: int_orders__pivoted
     description: One row per order, with the amount paid by each payment method.
